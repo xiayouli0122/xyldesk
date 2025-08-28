@@ -501,7 +501,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           debugShowCheckedModeBanner: false,
           title: isWeb
               ? '${bind.mainGetAppNameSync()} Web Client V2 (Preview)'
-              : bind.mainGetAppNameSync(),
+              : '${bind.mainGetAppNameSync()} (${bind.mainGetVersion()})',
           theme: MyTheme.lightTheme,
           darkTheme: MyTheme.darkTheme,
           themeMode: MyTheme.currentThemeMode(),
