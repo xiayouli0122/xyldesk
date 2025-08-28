@@ -8,8 +8,8 @@ on:
 
 jobs:
   run-flutter-android-nightly-build:
-    uses: ./.github/workflows/flutter-build_android.yml
+    uses: ./.github/workflows/flutter-build_windows.yml
     secrets: inherit
     with:
       upload-artifact: true
-      upload-tag: "android-nightly"
+      upload-tag: "windows-nightly"
