@@ -966,9 +966,9 @@ void androidChannelInit() {
   Future<bool> success = setServerConfig(null, null, sc);
   success.then((value) {
     if (value) {
-      showToast('配置自定义ID Server成功--1');
+      showToast('配置自定义ID Server成功');
     } else {
-      showToast('配置自定义ID Server失败--1');
+      showToast('配置自定义ID Server失败');
     }
   });
   gFFI.setMethodCallHandler((method, arguments) {

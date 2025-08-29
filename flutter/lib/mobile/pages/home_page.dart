@@ -163,7 +163,7 @@ class HomePageState extends State<HomePage> {
         ],
       );
     }
-    return Text('${bind.mainGetAppNameSync()}(v${bind.mainGetVersion()})');
+    return Text('${bind.mainGetAppNameSync()}(v$version)');
   }
 }
 
