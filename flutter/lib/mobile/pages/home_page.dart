@@ -1,4 +1,6 @@
+import 'package:clipboard_listener/clipboard_listener.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_hbb/mobile/pages/server_page.dart';
 import 'package:flutter_hbb/mobile/pages/settings_page.dart';
 import 'package:flutter_hbb/web/settings_page.dart';
@@ -44,18 +46,44 @@ class HomePageState extends State<HomePage> {
     super.initState();
     initPages();
     //YURI use fix id server
-    // var sc = ServerConfig();
-    // sc.idServer = "cn.asxes.com";
-    // sc.relayServer = "cn.asxes.com";
-    // sc.key = "asxes";
-    // Future<bool> success = setServerConfig(null, null, sc);
-    // success.then((value) {
-    //   if (value) {
-    //     showToast('配置自定义ID Server成功');
-    //   } else {
-    //     showToast('配置自定义ID Server失败');
-    //   }
-    // });
+    ClipboardListener.addListener(_onClipboardChanged);
+  }
+
+  void _onClipboardChanged() {
+    // 在剪切板内容变化时触发
+    Clipboard.getData(Clipboard.kTextPlain).then((data) {
+      if (data != null) {
+        //如果剪切板内容为空，返回
+        print("剪切板内容: ${data.text}");
+        //YURI:cn.asxes.com;cn.asxes.com;asxes
+        showToast(data.text ?? "剪切板内容为空");
+        if (data.text!.startsWith("YURI://")) {
+          var text = data.text!.replaceAll("YURI://", "");
+          var array = text.split(';');
+          var idServer = array[0];
+          var relayServer = array[1];
+          var key = array[2];
+          var sc = ServerConfig();
+          sc.idServer = idServer;
+          sc.relayServer = relayServer;
+          sc.key = key;
+          Future<bool> success = setServerConfig(null, null, sc);
+          success.then((value) {
+            if (value) {
+              showToast('配置自定义服务器成功');
+            } else {
+              showToast('配置自定义服务器失败');
+            }
+          });
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    ClipboardListener.removeListener(_onClipboardChanged);
   }
 
   void initPages() {

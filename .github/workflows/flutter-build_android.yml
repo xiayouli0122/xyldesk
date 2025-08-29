@@ -9,6 +9,9 @@ on:
       upload-tag:
         type: string
         default: "android"
+      upload-type:
+        type: string
+        default: "debug"
 
 # NOTE: F-Droid builder script 'flutter/build_fdroid.sh' reads environment
 # variables from this workflow!
@@ -30,6 +33,7 @@ env:
   # for arm64 linux because official Dart SDK does not work
   FLUTTER_ELINUX_VERSION: "3.16.9"
   TAG_NAME: "${{ inputs.upload-tag }}"
+  BUILD_TYPE: "${{ inputs.upload-type }}"
   VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
   # vcpkg version: 2025.01.13
   # If we change the `VCPKG COMMIT_ID`, please remember:
@@ -62,7 +66,7 @@ jobs:
               arch: aarch64,
               target: aarch64-linux-android,
               os: ubuntu-24.04,
-              reltype: debug,
+              reltype: ${{ env.BUILD_TYPE }},
               suffix: "",
             }
     steps:
