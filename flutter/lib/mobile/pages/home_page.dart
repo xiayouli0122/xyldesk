@@ -44,18 +44,18 @@ class HomePageState extends State<HomePage> {
     super.initState();
     initPages();
     //YURI use fix id server
-    var sc = ServerConfig();
-    sc.idServer = "cn.asxes.com";
-    sc.relayServer = "cn.asxes.com";
-    sc.key = "asxes";
-    Future<bool> success = setServerConfig(null, null, sc);
-    success.then((value) {
-      if (value) {
-        showToast('配置自定义ID Server成功');
-      } else {
-        showToast('配置自定义ID Server失败');
-      }
-    });
+    // var sc = ServerConfig();
+    // sc.idServer = "cn.asxes.com";
+    // sc.relayServer = "cn.asxes.com";
+    // sc.key = "asxes";
+    // Future<bool> success = setServerConfig(null, null, sc);
+    // success.then((value) {
+    //   if (value) {
+    //     showToast('配置自定义ID Server成功');
+    //   } else {
+    //     showToast('配置自定义ID Server失败');
+    //   }
+    // });
   }
 
   void initPages() {

@@ -299,9 +299,11 @@ class ScamWarningDialogState extends State<ScamWarningDialog> {
     _serverModel = widget.serverModel;
     //YURI 定制版本取消倒计时
     //startCountdown();
-    setState(() {
-      _countdown = 0;
-    })
+    if (_countdown > 0) {
+      setState(() {
+        _countdown = 0;
+      });
+    }
   }
 
   void startCountdown() {
