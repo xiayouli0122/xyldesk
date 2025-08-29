@@ -283,6 +283,7 @@ jobs:
         if: env.ANDROID_SIGNING_KEY != null && env.UPLOAD_ARTIFACT == 'true'
         uses: softprops/action-gh-release@v1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
           files: |
@@ -292,6 +293,7 @@ jobs:
         if: env.ANDROID_SIGNING_KEY == null && env.UPLOAD_ARTIFACT == 'true'
         uses: softprops/action-gh-release@v1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
           files: |
