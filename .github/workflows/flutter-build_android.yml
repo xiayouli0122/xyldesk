@@ -1,7 +1,4 @@
 name: Build the flutter version of the RustDesk
-
-permissions:
-  contents: write
   
 on:
   workflow_call:
@@ -433,8 +430,8 @@ jobs:
           BUILD_TOOLS_VERSION: ${{ env.ANDROID_SIGN_TOOL_VERSION }}
 
       - name: Upload Artifacts
-        #if: env.ANDROID_SIGNING_KEY != null && env.UPLOAD_ARTIFACT == 'true'
-        if: false
+        if: env.ANDROID_SIGNING_KEY != null && env.UPLOAD_ARTIFACT == 'true'
+        #if: false
         uses: actions/upload-artifact@master
         with:
           name: rustdesk-${{ env.VERSION }}-${{ matrix.job.arch }}.apk
