@@ -1,5 +1,8 @@
 name: Build the flutter version of the RustDesk
 
+permissions:
+  contents: write
+  
 on:
   workflow_call:
     inputs:
@@ -283,7 +286,7 @@ jobs:
         if: env.ANDROID_SIGNING_KEY != null && env.UPLOAD_ARTIFACT == 'true'
         uses: softprops/action-gh-release@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
           files: |
@@ -293,7 +296,7 @@ jobs:
         if: env.ANDROID_SIGNING_KEY == null && env.UPLOAD_ARTIFACT == 'true'
         uses: softprops/action-gh-release@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ github.token }}
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
           files: |
