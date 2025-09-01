@@ -203,13 +203,16 @@ List<Widget> ServerConfigImportExportWidgets(
   return [
     Tooltip(
       message: translate('Import server config'),
-      child: IconButton(
-          icon: Icon(Icons.paste, color: Colors.grey), onPressed: import),
+      //调整为按钮
+      child: ElevatedButton(onPressed: import(), child: Text("导入"))
+      //child: IconButton(
+      //    icon: Icon(Icons.paste, color: Colors.grey), onPressed: import),
     ),
     Tooltip(
         message: translate('Export Server Config'),
-        child: IconButton(
-            icon: Icon(Icons.copy, color: Colors.grey), onPressed: export))
+        child: ElevatedButton(onPressed: export(), child: Text("导出")),
+        //child: IconButton(
+        //    icon: Icon(Icons.copy, color: Colors.grey), onPressed: export))
   ];
 }
 
