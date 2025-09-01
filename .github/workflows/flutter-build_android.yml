@@ -283,19 +283,19 @@ jobs:
         if: env.ANDROID_SIGNING_KEY != null && env.UPLOAD_ARTIFACT == 'true'
         uses: softprops/action-gh-release@v1
         with:
-          token: ${{ github.token }}
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
+          token: ${{ github.token }}  
           files: |
             ${{steps.sign-rustdesk.outputs.signedReleaseFile}}
-
+          
       - name: Publish unsigned apk package
         if: env.ANDROID_SIGNING_KEY == null && env.UPLOAD_ARTIFACT == 'true'
         uses: softprops/action-gh-release@v1
         with:
-          token: ${{ github.token }}
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
+          token: ${{ github.token }}  
           files: |
             signed-apk/rustdesk-${{ env.VERSION }}-${{ matrix.job.arch }}.apk
 
@@ -443,6 +443,7 @@ jobs:
         with:
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
+          token: ${{ github.token }}  
           files: |
             ${{steps.sign-rustdesk.outputs.signedReleaseFile}}
 
@@ -452,6 +453,7 @@ jobs:
         with:
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
+          token: ${{ github.token }}  
           files: |
             signed-apk/rustdesk-${{ env.VERSION }}-universal${{ env.suffix }}.apk
 
