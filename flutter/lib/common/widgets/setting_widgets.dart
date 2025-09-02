@@ -210,7 +210,8 @@ List<Widget> ServerConfigImportExportWidgets(
     ),
     Tooltip(
         message: translate('Export Server Config'),
-        child: ElevatedButton(onPressed: export, child: Text("导出")),
+        margin: const EdgeInsets.only(left: 10),
+        child: TextButton(onPressed: export, child: Text("导出"))
     )
         //child: IconButton(
         //    icon: Icon(Icons.copy, color: Colors.grey), onPressed: export))
