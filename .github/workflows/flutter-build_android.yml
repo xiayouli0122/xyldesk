@@ -285,7 +285,7 @@ jobs:
         with:
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
-          token: ${{ github.token }}  
+          #token: ${{ github.token }}  
           files: |
             ${{steps.sign-rustdesk.outputs.signedReleaseFile}}
           
@@ -295,7 +295,7 @@ jobs:
         with:
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
-          token: ${{ github.token }}  
+          #token: ${{ github.token }}  
           files: |
             signed-apk/rustdesk-${{ env.VERSION }}-${{ matrix.job.arch }}.apk
 
@@ -443,7 +443,7 @@ jobs:
         with:
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
-          token: ${{ github.token }}  
+          #token: ${{ github.token }}  
           files: |
             ${{steps.sign-rustdesk.outputs.signedReleaseFile}}
 
@@ -453,7 +453,7 @@ jobs:
         with:
           prerelease: true
           tag_name: ${{ env.TAG_NAME }}
-          token: ${{ github.token }}  
+          #token: ${{ github.token }}  
           files: |
             signed-apk/rustdesk-${{ env.VERSION }}-universal${{ env.suffix }}.apk
 
