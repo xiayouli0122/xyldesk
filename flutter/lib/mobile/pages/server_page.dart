@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -959,18 +960,30 @@ class ClientInfo extends StatelessWidget {
 void androidChannelInit() {
   debugPrint("androidChannelInit");
   //YURI use fix id server
-  var sc = ServerConfig();
-  sc.idServer = "cn.asxes.com";
-  sc.relayServer = "cn.asxes.com";
-  sc.key = "asxes";
-  Future<bool> success = setServerConfig(null, null, sc);
-  success.then((value) {
-    if (value) {
-      showToast('配置自定义ID Server成功');
-    } else {
-      showToast('配置自定义ID Server失败');
-    }
-  });
+  try {
+    bind.mainGetOptions().then((value) {
+      debugPrint("options:$value");
+      Map<String, dynamic> options = jsonDecode(value);
+      var sc = ServerConfig.fromOptions(options);
+      if (sc.idServer.isEmpty || sc.relayServer.isEmpty) {
+        sc.idServer = "106.13.163.132:12216";
+        sc.relayServer = "106.13.163.132:12217";
+        sc.key = "SSUtDRWCAPK86bcEvXFw";
+        Future<bool> success = setServerConfig(null, null, sc);
+        success.then((value) {
+          if (value) {
+            showToast('配置自定义ID Server成功');
+          } else {
+            showToast('配置自定义ID Server失败');
+          }
+        });
+      }
+    }).catchError((e) {
+      print("Invalid server config: $e");
+    });
+  } catch (e) {
+    print("Invalid server config: $e");
+  }
   gFFI.setMethodCallHandler((method, arguments) {
     debugPrint("flutter got android msg,$method,$arguments");
     try {
