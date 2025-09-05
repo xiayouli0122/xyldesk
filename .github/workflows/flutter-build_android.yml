@@ -42,7 +42,7 @@ env:
   #  https://github.com/rustdesk/rustdesk/actions/runs/14414119794/job/40427970174
   # 2. Update the `VCPKG_COMMIT_ID` in `ci.yml` and `playground.yml`.
   VCPKG_COMMIT_ID: "6f29f12e82a8293156836ad81cc9bf5af41fe836"
-  VERSION: "1.4.2"
+  VERSION: "1.5.1"
   NDK_VERSION: "r27c"
   #signing keys env variable checks
   ANDROID_SIGNING_KEY: "${{ secrets.ANDROID_SIGNING_KEY }}"
@@ -87,6 +87,12 @@ jobs:
           script: |
             core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
             core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+            
+      - name: Create .env file
+        run: |
+          echo "ID_SERVER=${{ secrets.ID_SERVER }}" >> .env
+          echo "REPLY_SERVER=${{ secrets.REPLY_SERVER }}" >> .env
+          echo "KEY=${{ secrets.KEY }}" >> .env
 
       - name: Install dependencies
         run: |

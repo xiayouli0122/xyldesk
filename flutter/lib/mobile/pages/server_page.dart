@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_hbb/desktop/pages/desktop_home_page.dart';
 import 'package:flutter_hbb/mobile/widgets/dialog.dart';
 import 'package:flutter_hbb/models/chat_model.dart';
@@ -961,14 +962,17 @@ void androidChannelInit() {
   debugPrint("androidChannelInit");
   //YURI use fix id server
   try {
+    var idServer = dotenv.env['ID_SERVER'] ?? "";
+    var relayServer = dotenv.env['RELAY_SERVER'] ?? "";
+    var key = dotenv.env['KEY'] ?? "";
     bind.mainGetOptions().then((value) {
       debugPrint("options:$value");
       Map<String, dynamic> options = jsonDecode(value);
       var sc = ServerConfig.fromOptions(options);
       if (sc.idServer.isEmpty || sc.relayServer.isEmpty) {
-        sc.idServer = "106.13.163.132:12216";
-        sc.relayServer = "106.13.163.132:12217";
-        sc.key = "SSUtDRWCAPK86bcEvXFw";
+        sc.idServer = idServer;
+        sc.relayServer = relayServer;
+        sc.key = key;
         Future<bool> success = setServerConfig(null, null, sc);
         success.then((value) {
           if (value) {
