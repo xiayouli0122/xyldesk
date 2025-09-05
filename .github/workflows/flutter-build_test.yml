@@ -70,11 +70,12 @@ jobs:
             
       - name: Create .env file
         run: |
+          set -ex
           pwd
           ls
           cd flutter
           pwd
-          echo "ID_SERVER=${{ secrets.ID_SERVER }}" >> .env
+          echo "ID_SERVER=${{ secrets.ID_SERVER }}" > .env
           echo "REPLY_SERVER=${{ secrets.REPLY_SERVER }}" >> .env
           echo "KEY=${{ secrets.KEY }}" >> .env
           cat .env
