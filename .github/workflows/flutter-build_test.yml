@@ -72,6 +72,11 @@ jobs:
         run: |
           pwd
           ls
-          echo "ID_SERVER=${{ secrets.ID_SERVER }}" >> flutter/.env
-          echo "REPLY_SERVER=${{ secrets.REPLY_SERVER }}" >> flutter/.env
-          echo "KEY=${{ secrets.KEY }}" >> flutter/.env
+          cd flutter
+          pwd
+          echo "ID_SERVER=${{ secrets.ID_SERVER }}" >> .env
+          echo "REPLY_SERVER=${{ secrets.REPLY_SERVER }}" >> .env
+          echo "KEY=${{ secrets.KEY }}" >> .env
+          cat .env
+          cd ..
+          pwd
